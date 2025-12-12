@@ -1,0 +1,29 @@
+# Load libraries
+import numpy as np
+import pandas as pd
+from sklearn import metrics #Import scikit-learn metrics module for accuracy calculation
+df=pd.read_csv(r"C:\Users\HPR\Desktop\ML Syllabus\Play_Tennis_reg.csv")
+len(df) 
+df.shape #To see the number of rows and columns in our dataset:
+# Select features and target
+X = df.drop("Golf Players", axis=1)
+y = df['Golf Players']
+X
+y
+from sklearn import preprocessing
+string_to_int= preprocessing.LabelEncoder() #encode your data
+X=X.apply(string_to_int.fit_transform) #fit and transform it
+X
+from sklearn.tree import DecisionTreeRegressor
+reg = DecisionTreeRegressor()
+reg = reg.fit(X, y)
+y_pred = reg.predict([[2,1,0,1]]) 
+# print the Result 
+print("Result is: ", y_pred)
+
+y_pred = reg.predict([[2,1,0,0]]) 
+# print the Result 
+print("Result is: ", y_pred) 
+y_pred = reg.predict([[1,2,0,0]]) 
+# print the Result 
+print("Result is: ", y_pred)
