@@ -1,0 +1,36 @@
+# Training loop
+epochs = 0
+while True:
+ error_count = 0 # Track the number of misclassifications
+ 
+ for i in range(len(inputs)):
+     # Calculate weighted sum including the bias
+     net_input = w1 * inputs[i][0] + w2 * inputs[i][1] + bias
+     
+     # Apply activation function
+     output = activation_function(net_input)
+     
+     # Calculate error
+     error = expected_outputs[i] - output
+     
+     # Update weights and bias if there is an error
+     if error != 0:
+         w1 += learning_rate * error * inputs[i][0]
+         w2 += learning_rate * error * inputs[i][1]
+         bias += learning_rate * error # Update bias as well
+         error_count += 1
+     
+ epochs += 1
+ 
+ # Break if there are no errors
+ if error_count == 0:
+   break
+# Display results
+print(f"Training completed in {epochs} epochs")
+print(f"Final weights: w1 = {w1}, w2 = {w2}, bias = {bias}")
+# Test the perceptron on all input cases
+print("Testing perceptron for AND gate:")
+for i in range(len(inputs)):
+     net_input = w1 * inputs[i][0] + w2 * inputs[i][1] + bias
+     output = activation_function(net_input)
+     print(f"Input: {inputs[i]}, Output: {output}, Expected: {expected_outputs[i]}")
